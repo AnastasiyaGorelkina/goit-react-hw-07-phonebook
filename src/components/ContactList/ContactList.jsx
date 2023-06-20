@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Item, List, Button, Loading } from "./ContactList.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContactsThunk, getContactsThunk } from "redux/contactThunk";
+import Notiflix from "notiflix";
 
 export const ContactList = () => {
   const contacts = useSelector(state => state.contacts.items);
@@ -14,7 +15,9 @@ export const ContactList = () => {
   }, [dispatch]);
 
   const deletContact = id => {
+    Notiflix.Notify.failure('Contact delet');
     dispatch(deleteContactsThunk(id));
+    
   };
 
   const getVisibleContacts = () => {

@@ -2,6 +2,7 @@ import { Label, Form, Title, Input, Add } from './ContactsForm.styled';
 import { nanoid } from 'nanoid';
 import { addContactsThunk } from 'redux/contactThunk';
 import { useDispatch, useSelector } from 'react-redux';
+import Notiflix from 'notiflix';
 
 
 export const ContactForm = () => {
@@ -20,11 +21,11 @@ export const ContactForm = () => {
       phone: e.target.number.value,
     };
     if (contacts.find(({ name }) => name === contact.name)) {
-      alert('sorry, something went wrong');
+      Notiflix.Notify.warning('Such a contact already exists! Try again.');
       return;
     }
     dispatch(addContactsThunk(contact));
-    alert(' Add contact');
+    Notiflix.Notify.success(' Add contact');
     e.target.reset();
   };
 
